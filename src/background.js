@@ -12,7 +12,7 @@ browser.runtime.onMessage.addListener((message, sender, respond) => {
 			});
 
 			browser.tabs
-				.query({ currentWindow: true })
+				.query({ currentWindow: true, hidden: false })
 				.then(tabs => {
 					browser.tabs.sendMessage(sender.tab.id, {
 						type: "tabs",
@@ -32,7 +32,7 @@ browser.runtime.onMessage.addListener((message, sender, respond) => {
 
 browser.tabs.onUpdated.addListener(() => {
 	browser.tabs
-		.query({ currentWindow: true })
+		.query({ currentWindow: true, hidden: false })
 		.then(tabs => {
 
 			tabs.forEach(tab => {
