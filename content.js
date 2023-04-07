@@ -40,18 +40,21 @@ function updateResults() {
 	itemContainer.innerHTML = "";
 	info.innerText = "Loading..";
 	
-	for (let i = 0; i < 20 && i < tabs.length; i++) {
-		const tab = tabs[i];
+	let count = 0;
+	tabs.forEach(tab => {
+		const regex = new RegExp(input.value, "i");
+
+		if (count >= 20 || !tab.title.match(regex)) return;
+		count++;
 
 		const icon = document.createElement("img");
 		icon.className = "tabswitcher-icon";
 		icon.src = tab.favIconUrl;
 		icon.onerror = () => icon.style.visibility = "hidden";
 
-		const highlightIndex = tab.title.indexOf(input.value);
+		const highlightIndex = regex.exec(tab.title).index;
 
 		const title1 = document.createElement("span");
-		title1.className = "tabswitcher-title";
 		title1.innerText = tab.title.substr(0, highlightIndex);
 
 		const highlight = document.createElement("span");
@@ -59,18 +62,21 @@ function updateResults() {
 		highlight.innerText = tab.title.substr(highlightIndex, input.value.length);
 
 		const title2 = document.createElement("span");
-		title2.className = "tabswitcher-title";
 		title2.innerText = tab.title.substr(highlightIndex + input.value.length);
+
+		const title = document.createElement("span");
+		title.className = "tabswitcher-title";
+		title.appendChild(title1);
+		title.appendChild(highlight);
+		title.appendChild(title2);
 
 		const item = document.createElement("div");
 		item.className = "tabswitcher-item";
 		item.appendChild(icon);
-		item.appendChild(title1);
-		item.appendChild(highlight);
-		item.appendChild(title2);
+		item.appendChild(title);
 
 		itemContainer.appendChild(item);
-	}
+	});
 
 	if (tabs.length > 20) info.innerText = `+ ${tabs.length - 20} more tabs`;
 	else info.innerText = "";
@@ -102,6 +108,8 @@ input.addEventListener("keydown", event => {
 	event.stopPropagation();
 	return true;
 });
+
+input.addEventListener("keyup", updateResults);
 
 input.addEventListener("blur", event => {
 	container.style.display = "none";

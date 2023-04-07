@@ -39,22 +39,28 @@
 .tabswitcher-item {
 	display: flex       !important;
 	align-items: center !important;
-	gap: 5px            !important;
 	margin: 5px         !important;
 	min-width: 0        !important;
 }
 
 .tabswitcher-icon {
-	width: 14px    !important;
-	height: 14px   !important;
-	flex-shrink: 0 !important;
+	width: 14px       !important;
+	height: 14px      !important;
+	margin-right: 5px !important;
+	flex-shrink: 0    !important;
 }
 
-.tabswitcher-title {
+.tabswitcher-title, .tabswitcher-highlight {
 	overflow: hidden        !important;
 	text-overflow: ellipsis !important;
 	white-space: nowrap     !important;
 	color: black            !important;
+}
+
+.tabswitcher-highlight {
+	color: white            !important;
+	background-color: black !important;
+	border-radius: 3px      !important;
 }
 
 #tabswitcher-info {
@@ -74,6 +80,11 @@
 	}
 
 	.tabswitcher-title {
-		color: white              !important;
+		color: white !important;
+	}
+
+	.tabswitcher-highlight {
+		color: black            !important;
+		background-color: white !important;
 	}
 }
