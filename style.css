@@ -1,0 +1,68 @@
+#tabswitcher {
+	background-color: white;
+	position: fixed;
+	left: 50%;
+	top: 75px;
+	transform: translateX(-50%);
+	padding: 5px 15px;
+	border-radius: 2px;
+	display: none;
+	width: 500px;
+	max-width: 100%;
+	z-index: 999999;
+	font-size: 14px;
+	box-shadow:
+		5px  5px 5px rgba(0, 0, 0, 0.2),
+		-5px 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+#tabswitcher-input {
+	all: revert;
+	background-color: #F0F0F4;
+	border: 1px solid #3DAEE9;
+	outline: none;
+	color: black;
+	border-radius: 2px;
+	padding: 5px;
+	margin-bottom: 5px;
+	width: 100%;
+	box-sizing: border-box;
+	font-family: sans-serif;
+}
+
+.tabswitcher-item {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	margin: 5px;
+	min-width: 0;
+}
+
+.tabswitcher-icon {
+	width: 1em;
+	height: 1em;
+	flex-shrink: 0;
+}
+
+.tabswitcher-title {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+#tabswitcher-info {
+	font-size: 12px;
+	color: #BDBDBD;
+	text-align: center;
+}
+
+@media (prefers-color-scheme: dark) {
+	#tabswitcher {
+		background-color: #3D3C42;
+	}
+
+	#tabswitcher-input {
+		background-color: #1C1B22;
+		color: white;
+	}
+}

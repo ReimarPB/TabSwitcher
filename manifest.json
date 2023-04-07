@@ -1,0 +1,26 @@
+{
+	"manifest_version": 2,
+	"name": "Tab Switcher",
+	"version": "1.0",
+	"description": "Easily switch between tabs with a simple shortcut",
+	"author": "ReimarPB",
+	"icons": {
+		"48": "icons/icon-48.png",
+		"96": "icons/icon-96.png"
+	},
+	"background": {
+		"scripts": [ "background.js" ]
+	},
+	"content_scripts": [
+		{
+			"matches": [ "<all_urls>" ],
+			"js": [ "content.js" ],
+			"css": [ "style.css" ]
+		}
+	],
+	"web_accessible_resources": [ "style.css" ],
+	"permissions": [
+		"<all_urls>",
+		"tabs"
+	]
+}
