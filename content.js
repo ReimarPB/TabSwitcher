@@ -40,11 +40,11 @@ browser.runtime.onMessage.addListener(message => {
 function updateResults() {
 	itemContainer.innerHTML = "";
 	info.innerText = "Loading..";
+
+	const regex = new RegExp(input.value, "i");
 	
 	let count = 0;
 	tabs.forEach(tab => {
-		const regex = new RegExp(input.value, "i");
-
 		if (count >= 20 || !tab.title.match(regex)) return;
 		count++;
 
@@ -79,7 +79,9 @@ function updateResults() {
 		itemContainer.appendChild(item);
 	});
 
-	if (tabs.length > 20) info.innerText = `+ ${tabs.length - 20} more tabs`;
+	const tabCount = tabs.filter(tab => regex.test(tab.title)).length;
+	if (count == 20 && tabCount > 20) info.innerText = `+ ${tabCount - count} more tabs`;
+	else if (count === 0) info.innerText = "No tabs found";
 	else info.innerText = "";
 
 	updateSelection();
