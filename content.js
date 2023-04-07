@@ -5,6 +5,7 @@ input.placeholder = "Search tabs...";
 input.id = "tabswitcher-input";
 
 const itemContainer = document.createElement("div");
+itemContainer.id = "tabswitcher-items";
 
 const info = document.createElement("div");
 info.id = "tabswitcher-info";
@@ -23,7 +24,6 @@ browser.runtime.sendMessage({ type: "init" });
 let tabs = [];
 let shortcut = {};
 browser.runtime.onMessage.addListener(message => {
-	console.log(message);
 	switch (message.type) {
 		case "tabs":
 			tabs = message.tabs;

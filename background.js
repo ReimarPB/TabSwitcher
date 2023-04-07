@@ -27,14 +27,9 @@ browser.runtime.onMessage.addListener((message, sender, respond) => {
 	}
 });
 
-browser.tabs.onUpdated.addListener(sendTabs);
-
-function sendTabs() {
+browser.tabs.onUpdated.addListener(() => {
 	browser.tabs
-		.query({
-			currentWindow: true,
-			active: true,
-		})
+		.query({ currentWindow: true })
 		.then(tabs => {
 
 			tabs.forEach(tab => {
@@ -48,5 +43,5 @@ function sendTabs() {
 			});
 
 		});
-}
+});
 
