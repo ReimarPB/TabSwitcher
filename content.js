@@ -21,6 +21,7 @@ document.body.appendChild(container);
 
 browser.runtime.sendMessage({ type: "init" });
 
+let selectedIndex = 0;
 let tabs = [];
 let shortcut = {};
 browser.runtime.onMessage.addListener(message => {
@@ -80,6 +81,15 @@ function updateResults() {
 
 	if (tabs.length > 20) info.innerText = `+ ${tabs.length - 20} more tabs`;
 	else info.innerText = "";
+
+	updateSelection();
+}
+
+function updateSelection() {
+	[].slice.call(container.getElementsByClassName("tabswitcher-selected"))
+		.forEach(item => item.classList.remove("tabswitcher-selected"));
+
+	container.getElementsByClassName("tabswitcher-item")[selectedIndex].classList.add("tabswitcher-selected");
 }
 
 // Listen for keyboard shortcut
@@ -94,6 +104,7 @@ document.addEventListener("keydown", event => {
 	}
 
 	container.style.display = "block";
+	selectedIndex = 0;
 	input.value = "";
 	input.focus();
 });
@@ -102,6 +113,18 @@ input.addEventListener("keydown", event => {
 	if (event.code === "Escape") {
 		container.style.display = "none";
 		return;
+	}
+
+	if (event.code === "ArrowDown") {
+		selectedIndex = Math.min(19, tabs.length, selectedIndex + 1);
+		updateSelection();
+		return false;
+	}
+
+	if (event.code === "ArrowUp") {
+		selectedIndex = Math.max(0, selectedIndex - 1);
+		updateSelection();
+		return false;
 	}
 
 	// Override sites that prevent all keystrokes
