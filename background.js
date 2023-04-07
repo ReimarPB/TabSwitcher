@@ -21,8 +21,11 @@ browser.runtime.onMessage.addListener((message, sender, respond) => {
 				});
 
 			break;
-		case "switch_tab":
-			tabs.update(message.tab, { highlighted: true });		
+		case "switch-tab":
+			browser.tabs.update(
+				parseInt(message.tab),
+				{ active: true }
+			);		
 			break;
 	}
 });

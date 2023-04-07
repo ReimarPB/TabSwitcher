@@ -73,6 +73,7 @@ function updateResults() {
 
 		const item = document.createElement("div");
 		item.className = "tabswitcher-item";
+		item.dataset.id = tab.id;
 		item.appendChild(icon);
 		item.appendChild(title);
 
@@ -126,6 +127,15 @@ input.addEventListener("keydown", event => {
 	if (event.code === "ArrowUp") {
 		selectedIndex = Math.max(0, selectedIndex - 1);
 		updateSelection();
+		return false;
+	}
+
+	if (event.code === "Enter") {
+		const tab = container.getElementsByClassName("tabswitcher-selected")[0].dataset.id;
+		browser.runtime.sendMessage({
+			type: "switch-tab",
+			tab,
+		});
 		return false;
 	}
 

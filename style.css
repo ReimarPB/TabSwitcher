@@ -1,6 +1,7 @@
 /* Revert all properties, then override with !important to prevent sites from overriding these styles */
 #tabswitcher, #tabswitcher * {
 	all: revert;
+	font-family: sans-serif !important;
 }
 
 #tabswitcher {
@@ -33,7 +34,6 @@
 	margin: 5px 15px          !important;
 	width: calc(100% - 30px)  !important;
 	box-sizing: border-box    !important;
-	font-family: sans-serif   !important;
 }
 
 .tabswitcher-item {
